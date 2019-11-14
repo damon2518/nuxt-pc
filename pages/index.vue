@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <logo />
-      <a href="http://www.win4000.com/mt/dilireba.html" target="_blank"></a>
+
       <h1 class="title">
         nuxt-pc
       </h1>
@@ -16,6 +16,8 @@
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">
           GitHub
         </a>
+        <a href="http://www.win4000.com/mt/dilireba.html" target="_blank"
+          class="button--grey">美女图片</a>
       </div>
     </div>
   </div>
