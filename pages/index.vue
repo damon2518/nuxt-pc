@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div>
+    <Login></Login>
+    <!-- <div>
       <logo />
 
       <h1 class="title">
@@ -19,22 +20,25 @@
         <a href="http://www.win4000.com/meinvtag752.html" target="_blank"
           class="button--grey">跳转查看</a>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
-
+// import Logo from "~/components/Logo.vue";
+import Login from "~/components/login/index";
 export default {
+  layout: "index",
   components: {
-    Logo
+    // Logo,
+    Login
   }
 };
 </script>
 
 <style>
 .container {
+  width: 100%;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

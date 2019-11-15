@@ -1,0 +1,48 @@
+/**
+*公共方法
+*/
+$mainColor: #ff7c34;
+$festivalColor: #ff6143;
+@mixin pigbg {
+}
+@mixin left {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
