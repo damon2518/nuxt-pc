@@ -16,8 +16,8 @@
         <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">
           GitHub
         </a>
-        <a href="http://www.win4000.com/mt/dilireba.html" target="_blank"
-          class="button--grey">美女图片</a>
+        <a href="http://www.win4000.com/meinvtag752.html" target="_blank"
+          class="button--grey">跳转查看</a>
       </div>
     </div>
   </div>
