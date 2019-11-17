@@ -2,27 +2,17 @@
   <div class="head">
     <div class="top_menu_left">nuxt后台管理系统</div>
     <div class="top_menu_center">
-      <nuxt-link
-        class="menu-item"
-        href=""
-        :to="item.path"
-        v-for="(item, index) in menu"
-        :key="index"
-        :class="{ active: item.path === active }"
-      >
+      <nuxt-link class="menu-item" href="" :to="item.path" v-for="(item, index) in menu"
+        :key="index" :class="{ active: item.path === active }">
         <img :src="item.icon" alt="" />
         <span class="item-text">{{ item.name }}</span>
       </nuxt-link>
     </div>
     <div class="top_menu_right">
-      <span>信息</span>
-      <el-upload
-        class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
-      >
+      <span><img :src="require('@/assets/img/info.png')" alt=""></span>
+      <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false" :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
         <img :src="imageUrl" class="avatar_img" />
       </el-upload>
       <div>Alice</div>

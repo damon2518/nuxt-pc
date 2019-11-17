@@ -3,40 +3,27 @@
     <div class="login_box">
       <h2 class="title">nuxt后台管理系统</h2>
       <div class="ms_login">
-        <p>请输入用户名和密码</p>
-        <el-form
-          :model="ruleForm"
-          :rules="ruleInline"
-          ref="ruleForm"
-          label-width="0px"
-          class="demo_ruleForm"
-        >
+        <p class="p_box"><img class="p_img" :src="require('@/assets/img/cup.png')" alt="">请输入用户名和密码
+        </p>
+        <el-form :model="ruleForm" :rules="ruleInline" ref="ruleForm" label-width="0px"
+          class="demo_ruleForm">
           <el-form-item prop="username">
-            <el-input
-              v-model="ruleForm.username"
-              placeholder="用户名"
-            ></el-input>
+            <img class="img_img" :src="require('@/assets/img/username.png')" alt="">
+            <el-input v-model="ruleForm.username" placeholder="用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              type="password"
-              placeholder="密码"
-              v-model="ruleForm.password"
-              @keyup.enter.native="submitForm('ruleForm')"
-            ></el-input>
+            <img class="img_img" :src="require('@/assets/img/password.png')" alt="">
+            <el-input type="password" placeholder="密码" v-model="ruleForm.password"></el-input>
           </el-form-item>
           <el-form-item prop="vcode" class="vcode_box">
-            <el-input
-              type="password"
-              placeholder="验证码"
-              v-model="ruleForm.vcode"
-            ></el-input>
+            <img class="img_img" :src="require('@/assets/img/code.png')" alt="">
+            <el-input type="password" placeholder="验证码" v-model="ruleForm.vcode"></el-input>
+            <div class="vcode_img"><img class="img" src="" alt="图片"></div>
           </el-form-item>
+
           <el-checkbox v-model="checked">记住密码</el-checkbox>
           <div class="login_btn">
-            <el-button type="primary" @click="submitForm('ruleForm')"
-              >登录</el-button
-            >
+            <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
           </div>
         </el-form>
       </div>
@@ -98,11 +85,11 @@ export default {
         vcode: [
           {
             required: true,
-            message: "验证码错误",
+            message: "请填写验证码",
             trigger: "blur"
           },
           {
-            type: "number",
+            type: "string",
             name: "vcode",
             pattern: /^[0-9]{5}$/,
             message: "请输入正确验证码",
@@ -120,19 +107,28 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      return this.$router.push("/home");
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$router.push("/home");
+          this.$message({
+            message: "登录成功",
+            type: "success"
+          });
+        } else {
+          this.$router.push("/home"); // 因没接数据,为方便校验失败也跳转首页
+          return false;
+        }
+      });
+
       const self = this;
-      //判断复选框是否被勾选 勾选则调用配置cookie方法
+      //判断,勾选则调用配置cookie方法
       if (self.checked == true) {
-        console.log("checked == true");
         //传入账号名，密码，和保存天数3个参数
         self.setCookie(self.ruleForm.username, self.ruleForm.password, 7);
       } else {
-        console.log("清空Cookie");
         //清空Cookie
         self.clearCookie();
       }
-      console.log("登陆成功");
     },
 
     //设置cookie
@@ -169,6 +165,13 @@ export default {
 </script>
 <style lang="scss">
 .login {
+  .el-input__inner {
+    padding-left: 54px;
+  }
+}
+</style>
+<style lang="scss">
+.login {
   .el-button--primary {
     width: 120px;
     font-size: 18px;
@@ -191,9 +194,8 @@ export default {
   height: 100vh;
   min-width: 1400px;
   @include center;
-  // background: url('../../assets/img/background.png') no-repeat center;
-  background: linear-gradient(to right, #2d8cf0, #2d0ff2);
-  // background-size: 100% 100%;
+  background: url("../../assets/img/bgimg.png") no-repeat center;
+  background-size: 100% 100%;
   .login_box {
     width: 480px;
     height: 700px;
@@ -217,23 +219,45 @@ export default {
       border: 1px solid #dddada;
       @include center;
       flex-direction: column;
-      p {
+      .p_box {
         width: 84%;
         margin-bottom: 24px;
         line-height: 60px;
         color: #428bca;
         text-align: left;
         border-bottom: 1px solid #71a8d7;
+        .p_img {
+          width: 23px;
+          height: 26px;
+          margin: -5px 14px;
+        }
       }
       .demo_ruleForm {
         width: 84%;
         text-align: left;
+        position: relative;
         .login_btn {
           width: 120px;
           margin: 15px auto;
         }
+        .img_img {
+          position: absolute;
+          z-index: 10000;
+          width: 20px;
+          height: 20px;
+          margin: 9px 0 0 18px;
+        }
         .vcode_box {
-          width: 240px;
+          width: 62%;
+          .vcode_img {
+            text-align: right;
+            .img {
+              margin: -40px 0 0 20px;
+              position: absolute;
+              width: 130px;
+              background-color: #ebf5fa;
+            }
+          }
         }
       }
     }

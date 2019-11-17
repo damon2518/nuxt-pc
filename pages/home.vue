@@ -1,52 +1,94 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <div>我是首页</div>
+  <div class="container_home">
+    <div class="list_box">
+      <div class="content_box1 one">
+        <p>+301人</p>
+        <p class="font1">今日业绩</p>
+      </div>
+      <div class="content_box1 two">
+        <p>+201人</p>
+        <p class="font1">昨天业绩</p>
+      </div>
+      <div class="content_box1 three">
+        <p>+28001人</p>
+        <p class="font1">本月业绩</p>
+      </div>
+      <div class="content_box1 four">
+        <p>+18001人</p>
+        <p class="font1">上月业绩</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
+// import Logo from "~/components/Logo.vue";
 
 export default {
-  components: {
-    Logo
-  }
+  data() {
+    return {};
+  },
+  components: {},
+  mounted() {},
+  methods: {}
 };
 </script>
 
-<style lang="scss">
-.container {
-  /* margin: 0 auto; */
-  min-height: 100vh;
-  /* border: 1px solid red; */
+<style lang="scss" scoped>
+@mixin center() {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+@mixin column() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.container_home {
+  min-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  .list_box {
+    width: 92%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 40px;
+    .content_box1 {
+      width: 22%;
+      height: 190px;
+      @include column;
+      border-radius: 5px;
+      color: #fff;
+      p:first-child {
+        font-size: 38px;
+        line-height: 120px;
+        white-space: nowrap;
+      }
+      p:last-child {
+        font-size: 22px;
+        padding-top: 10px;
+      }
+    }
+    .one {
+      background: url("../assets/img/home/nowadays.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .two {
+      background: url("../assets/img/home/yesterday.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .three {
+      background: url("../assets/img/home/month.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .four {
+      background: url("../assets/img/home/lastmonth.png") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
 }
 </style>

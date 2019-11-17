@@ -40,14 +40,13 @@ export default {
 .container {
   width: 100%;
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.title {
+/* .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
@@ -67,5 +66,5 @@ export default {
 
 .links {
   padding-top: 15px;
-}
+} */
 </style>
