@@ -33,7 +33,7 @@ export default {
         },
         {
           name: "页面1",
-          path: "/page1",
+          path: "/device",
           icon: require("../../assets/img/home.png")
         },
         {
@@ -43,7 +43,7 @@ export default {
         },
         {
           name: "页面3",
-          path: "/page3",
+          path: "/manageout",
           icon: require("../../assets/img/home.png")
         },
         {
