@@ -6,6 +6,7 @@
 <script>
 import Outgl from "~/components/manageout/outgl.vue";
 export default {
+  name: "manageout-index",
   components: {
     Outgl
   }

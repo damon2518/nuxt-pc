@@ -1,91 +1,67 @@
 <template>
-  <div class="outgl">
+  <div class="entergl">
     <!-- top选择 -->
-    <div class="select_box_outgl">
-      <div class="search_input_box_outgl">类别:
-        <el-select v-model="valuename" placeholder="请选择" size="medium">
-          <el-option v-for="item in options4" :key="item.value" :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div class="search_button_outgl" @click="lnquireContent()">
-        <span>查询</span>
-      </div>
-      <div class="search_status_outgl">
+    <div class="select_box_entergl">
+      <div>
         <span class="demonstration">开始时间:</span>
         <el-date-picker v-model="valueStart" type="datetime" placeholder="选择日期时间"
           default-time="00:00:00" size="medium">
         </el-date-picker>
       </div>
-      <div class="search_status_outgl">
+      <div class="search_status_entergl">
         <span class="demonstration">结束时间:</span>
         <el-date-picker v-model="valueEnd" type="datetime" placeholder="选择日期时间"
           default-time="23:59:59" size="medium">
         </el-date-picker>
       </div>
-      <div class="search_status_outgl">管理员:
-        <el-select v-model="value1" placeholder="请选择" size="medium" class="select_zt">
-          <el-option v-for="item in options3" :key="item.value" :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+      <div class="search_input_box">
+        <el-input placeholder="请输入内容" v-model="valuename" clearable size="medium"
+          prefix-icon="el-icon-search">
+        </el-input>
       </div>
-      <div class="search_status_outgl">管理状态:
-        <el-select v-model="value2" placeholder="请选择" size="medium" class="select_zt">
-          <el-option v-for="item in options4" :key="item.value" :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
+      <div class="search_button_entergl" @click="refreshContent()">
+        <i class="el-icon-refresh"></i>
+        <span>刷新</span>
       </div>
     </div>
-    <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+    <el-tabs v-model="activeName" type="card">
       <!-- 表格 -->
-      <el-tab-pane label="列表1" name="first">
-        <div class="form_box_outgl">
+      <el-tab-pane label="后台操作日志" name="first">
+        <div class="form_box_entergl">
           <el-table :data="tableData" stripe border style="width: 100%">
-            <el-table-column label="登录IP">
+            <el-table-column label="ID">
               <template slot-scope="scope">
-                <span>{{ scope.row.dlIP }}</span>
+                <span>{{ scope.row.id }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="型号">
+            <el-table-column label="管理员名称">
               <template slot-scope="scope">
-                <span>{{ scope.row.xh }}</span>
+                <span>{{ scope.row.name }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="工作状态">
+            <el-table-column label="操作内容">
               <template slot-scope="scope">
                 <span>{{ scope.row.gzzt }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="登录状态">
+            <el-table-column label="登录IP地址">
               <template slot-scope="scope">
-                <span>{{ scope.row.dlzt }}</span>
+                <span>{{ scope.row.dlIP }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="属于">
+            <el-table-column label="提交时间">
+              <template slot-scope="scope">
+                <span>{{ scope.row.date }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="备注">
               <template slot-scope="scope">
                 <div>
                   <span size="medium">{{ scope.row.name }}</span>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column label="账号">
-              <template slot-scope="scope">
-                <span>{{ scope.row.name }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="时间">
-              <template slot-scope="scope">
-                <span>{{ scope.row.date }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="工作时长">
-              <template slot-scope="scope">
-                <span>{{ scope.row.gzsj }}</span>
-              </template>
-            </el-table-column>
+
             <el-table-column label="操作">
               <template slot-scope="scope">
                 <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">
@@ -96,14 +72,13 @@
           </el-table>
         </div>
         <!-- 分页 -->
-        <div class="page_box_outgl">
+        <div class="page_box_entergl">
           <el-pagination background @current-change="handleCurrentChange"
             :current-page.sync="currentPage1" :page-size="pageNum" layout="total, prev, pager, next"
             :total="~~totalNum">
           </el-pagination>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="列表2" name="second">列表2管理</el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -112,7 +87,7 @@
 // import Logo from "~/components/Logo.vue";
 
 export default {
-  name: "outgl-list",
+  name: "entergl-list",
   components: {},
   data() {
     return {
@@ -156,7 +131,7 @@ export default {
       tableData: [
         {
           dlIP: "192.188.120.111",
-          xh: "华为",
+          id: "11",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -166,7 +141,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "12",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -176,7 +151,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "13",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -186,7 +161,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "14",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -196,7 +171,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "15",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -206,7 +181,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "16",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -216,7 +191,7 @@ export default {
         },
         {
           dlIP: "192.188.120.111",
-          xh: "iphone8",
+          id: "17",
           gzzt: "工作中",
           dlzt: "已登录",
           gzsj: "6",
@@ -239,24 +214,20 @@ export default {
   async mounted() {},
   methods: {
     // 搜索
-    async lnquireContent() {
+    async refreshContent() {
       if (this.valuename == "") {
         this.$message({
-          message: "请选择需要查询的内容...",
+          message: "请输入内容...",
           duration: 1000,
           type: "warning"
         });
       } else {
         this.$message({
-          message: `查询` + this.valuename,
+          message: `查询: ` + this.valuename,
           duration: 1000,
           type: "warning"
         });
       }
-    },
-    // 切换选项卡
-    handleClick(tab, event) {
-      console.log("1111", tab, event);
     },
     // 详情
     handleEdit(index, row) {
@@ -284,7 +255,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.outgl {
+.entergl {
   .el-table th.is-leaf {
     background: #2592f3; // 表头
     text-align: center;
@@ -314,12 +285,12 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.outgl {
+.entergl {
   min-width: 1400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  .select_box_outgl {
+  .select_box_entergl {
     width: 97%;
     height: 60px;
     display: flex;
@@ -329,26 +300,26 @@ export default {
     margin: 10px 20px;
     font-size: 16px;
     color: #888888;
-    .search_button_outgl {
-      width: 60px;
+    .search_input_box {
+      margin-left: 20px;
+    }
+    .search_button_entergl {
+      width: 90px;
       height: 30px;
       background: #2592f3;
       border-radius: 5px;
-      margin-left: 20px;
+      margin-left: 10px;
       @include center;
       color: #fff;
     }
-    .search_status_outgl {
+    .search_status_entergl {
       margin-left: 20px;
-      .select_zt {
-        width: 120px;
-      }
     }
   }
-  .form_box_outgl {
+  .form_box_entergl {
     min-height: 200px;
   }
-  .page_box_outgl {
+  .page_box_entergl {
     @include center;
     margin-top: 30px;
   }

@@ -9,7 +9,9 @@
       </nuxt-link>
     </div>
     <div class="top_menu_right">
-      <span><img :src="require('@/assets/img/info.png')" alt=""></span>
+      <div class="information" @click="viewMessage"><img :src="require('@/assets/img/info.png')"
+          alt=""><i>{{~~num}}</i>
+      </div>
       <el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/"
         :show-file-list="false" :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload">
@@ -23,6 +25,7 @@
 export default {
   data() {
     return {
+      num: 5,
       imageUrl: require("../../assets/img/head_icon.jpg"),
       active: "",
       menu: [
@@ -33,12 +36,12 @@ export default {
         },
         {
           name: "页面1",
-          path: "/device",
+          path: "/managedevice",
           icon: require("../../assets/img/home.png")
         },
         {
           name: "页面2",
-          path: "/page2",
+          path: "/managecard",
           icon: require("../../assets/img/home.png")
         },
         {
@@ -48,7 +51,7 @@ export default {
         },
         {
           name: "页面页面4",
-          path: "/page4",
+          path: "/manageenter",
           icon: require("../../assets/img/home.png")
         }
       ]
@@ -56,6 +59,10 @@ export default {
   },
   computed: {},
   methods: {
+    // 查看消息
+    viewMessage() {
+      console.log("查看消息");
+    },
     clickMenu(item) {
       this.$nuxt.$router.push(item.path);
     },
@@ -92,6 +99,11 @@ export default {
 @mixin center() {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+@mixin end() {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 }
 .head {
@@ -136,8 +148,26 @@ export default {
   }
   .top_menu_right {
     width: 22%;
-    @include center;
+    @include end;
+    padding-right: 20px;
     // border: 1px solid red;
+    .information {
+      position: relative;
+      img {
+        width: 27px;
+        height: 21px;
+      }
+      i {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: red;
+        position: absolute;
+        margin: -6px 0 0 -8px;
+        font-size: 12px;
+        text-align: center;
+      }
+    }
     .avatar_img {
       display: inline-block;
       width: 50px;
