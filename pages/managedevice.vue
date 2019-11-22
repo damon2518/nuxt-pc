@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import Devicegl from "~/components/device/devicegl.vue";
+import Devicegl from "~/components/managedevice/devicegl.vue";
 
 export default {
   name: "device-index",

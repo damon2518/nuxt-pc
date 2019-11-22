@@ -10,7 +10,8 @@
       </div>
       <div class="search_button" @click="searchContent()">
         <span>搜索</span>
-        <img class="span_img" :src="require('@/assets/img/device/search.png')" alt="">
+        <i class="el-icon-search"></i>
+        <!-- <img class="span_img" :src="require('@/assets/img/device/search.png')" alt=""> -->
       </div>
       <div class="search_status">运行状态:
         <el-select v-model="value1" placeholder="请选择" size="medium" class="status_zt">
@@ -28,66 +29,72 @@
       </div>
     </div>
     <!-- 表格 -->
-    <div class="form_box">
-      <el-table :data="tableData" stripe border style="width: 100%">
-        <el-table-column label="登录IP">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.dlIP }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="型号">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.xh }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="工作状态">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.gzzt }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="登录状态">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.dlzt }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="属于">
-          <template slot-scope="scope">
-            <div>
-              <span size="medium">{{ scope.row.name }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column label="账号">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.name }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="时间">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.date }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="工作时长">
-          <template slot-scope="scope">
-            <span style="margin-left: 10px">{{ scope.row.gzsj }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
-    <!-- 分页 -->
-    <div class="page_box">
-      <el-pagination background @current-change="handleCurrentChange"
-        :current-page.sync="currentPage1" :page-size="pageNum" layout="total, prev, pager, next"
-        :total="~~totalNum">
-      </el-pagination>
-    </div>
-    <el-dialog title="修改提示" :visible.sync="centerDialogVisible" width="400px">
+    <el-tabs v-model="activeName" type="card">
+      <el-tab-pane label="设备列表" name="first">
+        <div class="form_box">
+          <el-table :data="tableData" stripe border style="width: 100%">
+            <el-table-column label="登录IP">
+              <template slot-scope="scope">
+                <span>{{ scope.row.dlIP }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="型号">
+              <template slot-scope="scope">
+                <span>{{ scope.row.xh }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="工作状态">
+              <template slot-scope="scope">
+                <span>{{ scope.row.gzzt }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="登录状态">
+              <template slot-scope="scope">
+                <span>{{ scope.row.dlzt }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="属于">
+              <template slot-scope="scope">
+                <div>
+                  <span size="medium">{{ scope.row.name }}</span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column label="账号">
+              <template slot-scope="scope">
+                <span>{{ scope.row.name }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="时间">
+              <template slot-scope="scope">
+                <span>{{ scope.row.date }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="工作时长">
+              <template slot-scope="scope">
+                <span>{{ scope.row.gzsj }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">
+                  编辑
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <!-- 分页 -->
+        <div class="page_box">
+          <el-pagination background @current-change="handleCurrentChange"
+            :current-page.sync="currentPage1" :page-size="pageNum" layout="total, prev, pager, next"
+            :total="~~totalNum">
+          </el-pagination>
+        </div>
+      </el-tab-pane>
+    </el-tabs>
+    <el-dialog title="修改提示" :visible.sync="centerDialogVisible" width="400px"
+      :close-on-click-modal="false">
       <el-switch v-model="valueSwitch" active-color="#13ce66">
       </el-switch>
       <span>需要注意的是内容是默认不居中的</span>
@@ -107,7 +114,7 @@ export default {
   components: {},
   data() {
     return {
-      // tableDatas: [],
+      activeName: "first",
       totalNum: "8",
       pageNum: 10,
       currentPage1: 1,
@@ -241,7 +248,11 @@ export default {
     // 搜索
     async searchContent() {
       if (this.valuename == "") {
-        return this.$message({ message: "请输入内容搜索...", type: "warning" });
+        return this.$message({
+          message: "请输入内容搜索...",
+          duration: 1000,
+          type: "warning"
+        });
       }
     },
     // 编辑
@@ -313,11 +324,11 @@ export default {
       margin-left: 20px;
       @include center;
       color: #fff;
-      .span_img {
-        margin-left: 5px;
-        width: 20px;
-        height: 20px;
-      }
+      // .span_img {
+      //   margin-left: 5px;
+      //   width: 20px;
+      //   height: 20px;
+      // }
     }
     .search_status {
       margin-left: 20px;

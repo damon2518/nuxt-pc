@@ -70,7 +70,7 @@ export default {
       }
       p:last-child {
         font-size: 22px;
-        padding-top: 10px;
+        padding-top: 5px;
       }
     }
     .one {
