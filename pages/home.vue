@@ -1,94 +1,53 @@
 <template>
   <div class="container_home">
-    <div class="list_box">
-      <div class="content_box1 one">
-        <p>+301人</p>
-        <p class="font1">今日业绩</p>
-      </div>
-      <div class="content_box1 two">
-        <p>+201人</p>
-        <p class="font1">昨天业绩</p>
-      </div>
-      <div class="content_box1 three">
-        <p>+28001人</p>
-        <p class="font1">本月业绩</p>
-      </div>
-      <div class="content_box1 four">
-        <p>+18001人</p>
-        <p class="font1">上月业绩</p>
-      </div>
-    </div>
+    <TopList />
+    <Graph />
+    <!-- <Chart /> -->
+    <Lines :dataX='dataXS' :dataY='dataYS' :title='title' :name='name' />
+    <Lines :dataX='dataXS' :dataY='dataYSS' :title='title' :name='name' />
   </div>
 </template>
-
 <script>
-// import Logo from "~/components/Logo.vue";
-
+import TopList from "~/components/home/index.vue";
+import Graph from "~/components/home/graph.vue";
+import Chart from "~/components/home/chart.vue";
+import Lines from "~/components/home/line.vue";
 export default {
+  name: "home-index",
   data() {
-    return {};
+    return {
+      dataXS: [
+        "11-22",
+        "11-23",
+        "11-24",
+        "11-25",
+        "11-26",
+        "11-27",
+        "11-28",
+        "11-29",
+        "11-30",
+        "12-1"
+      ],
+      dataYS: [150, 180, 200, 350, 600, 650, 700, 800],
+      dataYSS: [1500, 1800, 2000, 3500, 6000, 6500, 7000, 8000],
+      title: "总数",
+      name: "添加总人数"
+    };
   },
-  components: {},
+  components: {
+    TopList,
+    Graph,
+    Chart,
+    Lines
+  },
   mounted() {},
   methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
-@mixin center() {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-@mixin column() {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 .container_home {
-  min-width: 1400px;
-  display: flex;
-  flex-direction: column;
-  .list_box {
-    width: 92%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 40px;
-    .content_box1 {
-      width: 22%;
-      height: 190px;
-      @include column;
-      border-radius: 5px;
-      color: #fff;
-      p:first-child {
-        font-size: 38px;
-        line-height: 120px;
-        white-space: nowrap;
-      }
-      p:last-child {
-        font-size: 22px;
-        padding-top: 5px;
-      }
-    }
-    .one {
-      background: url("../assets/img/home/nowadays.png") no-repeat;
-      background-size: 100% 100%;
-    }
-    .two {
-      background: url("../assets/img/home/yesterday.png") no-repeat;
-      background-size: 100% 100%;
-    }
-    .three {
-      background: url("../assets/img/home/month.png") no-repeat;
-      background-size: 100% 100%;
-    }
-    .four {
-      background: url("../assets/img/home/lastmonth.png") no-repeat;
-      background-size: 100% 100%;
-    }
-  }
+  width: 100%;
+  height: 100%;
 }
 </style>
