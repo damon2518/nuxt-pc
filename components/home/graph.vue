@@ -46,6 +46,7 @@ export default {
     this.fun_date(-1);
   },
   methods: {
+    // 获取日期
     fun_date(digital) {
       const date1 = new Date(),
         time1 =
@@ -79,6 +80,7 @@ export default {
         legend: {
           data: []
         },
+
         grid: {
           left: "1%",
           right: "4%",
@@ -127,14 +129,20 @@ export default {
           },
           axisLabel: {
             formatter: "{value} "
+          },
+          nameTextStyle: {
+            //坐标轴名称的文字样式
+            color: "#f2ce07",
+            fontSize: 20,
+            padding: [0, 0, 20, 40]
           }
         },
         series: [
           {
             name: "数字",
             type: "line",
-            // symbol: "none", // 去掉小圆点
-            smooth: 0.4, // 弧度
+            symbol: "circle", // none标记的图形
+            smooth: 0.3, // 弧度
             symbolSize: 1,
             data: this.datass, // 动态数据
             lineStyle: {
@@ -187,7 +195,7 @@ export default {
       padding: 20px 0;
     }
     .graph_box {
-      min-height: 800px;
+      min-height: 600px;
       // border: 1px solid #d9d9d9;
       // background: rgb(121, 191, 238);
       .content {
